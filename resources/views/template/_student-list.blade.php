@@ -6,24 +6,21 @@
                 <th class="text-start">BirthDate</th>
                 <th class="text-start">Address</th>
                 <th class="text-start">Date-Created</th>
-                <th class="text-start">Billing</th>
+                <th class="text-start">Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($stud->get() as $student)
                 <tr>
                     <td>
-                        {{-- <a href="/account"> --}}
                         {{ $student->first_name }} {{ $student->last_name }}
-                        {{-- </a> --}}
                     </td>
                     <td>{{ $student->birth_date }}</td>
                     <td>{{ $student->address }}</td>
                     <td>{{ $student->created_at }}</td>
                     <td>
-                        <a href="/billing-statement/{{ $student->id }}">
-                            Show
-                        </a>
+                        <button hx-get="/api/students/{{ $student->id }}"
+                            hx-target="#display-student"onclick="show()">View</button>
                     </td>
                 </tr>
             @endforeach
@@ -35,3 +32,13 @@
         <h3>Student Added</h3>
     </div>
 </div>
+
+<script>
+    function show() {
+        document.getElementById('show').classList.add('hidden')
+        document.getElementById('editModal').classList.remove('hidden')
+        document.getElementById('hiddenText').classList.add('hidden')
+        document.getElementById('showText').classList.remove('hidden')
+        document.getElementById('back').classList.remove('hidden')
+    }
+</script>

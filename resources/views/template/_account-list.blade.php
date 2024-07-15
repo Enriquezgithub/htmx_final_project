@@ -7,6 +7,7 @@
                 <th class="text-start">Section</th>
                 <th class="text-start">Remarks</th>
                 <th class="text-start">Date-Created</th>
+                <th class="text-start">Bill</th>
                 {{-- <th class="text-start">Action</th> --}}
             </tr>
         </thead>
@@ -22,6 +23,11 @@
                     <td>{{ $account->section }}</td>
                     <td>{{ $account->remarks }}</td>
                     <td>{{ $account->created_at }}</td>
+                    <td>
+                        <a href="/billing-statement/{{ $account->id }}">
+                            Show
+                        </a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

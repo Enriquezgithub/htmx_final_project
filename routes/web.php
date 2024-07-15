@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ChargeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentController;
+use App\Models\Student;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,7 +12,8 @@ Route::get('/', function () {
 });
 
 Route::get('/student', function () {
-    return view('student.index');
+    $stud = Student::get();
+    return view('student.index', compact('stud'));
 })->name('student.index');
 
 Route::get('/student/{id}', [StudentController::class, 'find']);

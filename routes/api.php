@@ -13,6 +13,9 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('/student', [StudentController::class, 'index']);
+Route::get('/students/{id}', [StudentController::class, 'show']);
+Route::put('/students/{id}', [StudentController::class, 'update']);
+Route::get('/students/{id}/edit', [StudentController::class, 'edit']);
 Route::post('/student', [StudentController::class, 'store']);
 
 Route::get('/account', [AccountController::class, 'index']);

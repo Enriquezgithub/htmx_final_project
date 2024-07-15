@@ -8,11 +8,18 @@ use Illuminate\Http\Request;
 
 class ChargeController extends Controller
 {
+    // public function charge()
+    // {
+    //     $acc = Account::get();
+    //     return view('charge.index', compact('acc'));
+    // }
+
     public function charge()
     {
         $acc = Account::get();
-        return view('charge.index', compact('acc'));
+        return view('billing-statement', compact('acc'));
     }
+
 
     public function index()
     {

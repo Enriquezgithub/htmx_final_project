@@ -19,7 +19,7 @@
                     class="{{ request()->is('student') ? 'border-b-2 border-blue-800' : '' }}">Student</a>
                 <a href="/account"
                     class="{{ request()->is('account') ? 'border-b-2 border-blue-800' : '' }}">Account</a>
-                <a href="/charge" class="{{ request()->is('charge') ? 'border-b-2 border-blue-800' : '' }}">Charge</a>
+                {{-- <a href="/charge" class="{{ request()->is('charge') ? 'border-b-2 border-blue-800' : '' }}">Charge</a> --}}
                 <a href="/payment"
                     class="{{ request()->is('payment') ? 'border-b-2 border-blue-800' : '' }}">Payment</a>
             </div>
