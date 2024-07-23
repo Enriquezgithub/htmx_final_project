@@ -30,26 +30,29 @@ class AccountController extends Controller
             'remarks' => 'nullable|required',
         ]);
 
-
         $acc = Account::create($request->all());
-        // $stud = Student::get();
 
         return view('template._account-list', compact('acc'));
-
-
-        // dd('gana');
     }
 
     public function find($id)
     {
-        // dd('gana');
         $acc = Account::find($id);
-        // dd($stud);
-
+        
         return view('template._single-account-list', ['acc' => $acc]);
     }
 
     public function billing($id)
+    {
+        // dd($id);
+        $acc = Account::findOrFail($id);
+        $char = $acc->charges;
+        $pay = $acc->payments;
+
+        return view('billing-statement', compact('acc', 'char', 'pay'));
+    }
+
+    public function bill($id)
     {
         // dd($id);
         $acc = Account::findOrFail($id);
@@ -62,6 +65,6 @@ class AccountController extends Controller
         // dd($acc);
         // $charge = Charge::get();
         // $payment = Payment::get();
-        return view('billing-statement', compact('acc', 'char', 'pay'));
+        return view('billing-details', compact('acc', 'char', 'pay'));
     }
 }

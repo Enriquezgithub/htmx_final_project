@@ -27,7 +27,7 @@
                 value="{{ $stud->address }}">
         </div>
         <div class="mt-5 sm:mt-6 flex gap-3">
-            <button type="submit"
+            <button type="submit" onclick="showHidden()"
                 class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
                 Submit
             </button>
@@ -38,3 +38,12 @@
         </div>
     </form>
 </div>
+
+<script>
+    function showHidden() {
+
+        document.getElementById('hiddenText').classList.remove('hidden')
+        document.getElementById('hidden').classList.remove('hidden')
+        document.getElementById('showText').classList.add('hidden')
+    }
+</script>

@@ -11,6 +11,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::delete('/charge/{id}', [ChargeController::class, 'destroy']);
 
 Route::get('/student', [StudentController::class, 'index']);
 Route::get('/students/{id}', [StudentController::class, 'show']);

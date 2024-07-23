@@ -1,7 +1,7 @@
 @extends('layout.base')
 @section('content')
     <div class="mt-9">
-        <a href="/charge" class="bg-green-600 py-2 px-3 text-white rounded">Back</a>
+        <a href="/payment" class="bg-green-600 py-2 px-3 text-white rounded">Back</a>
         <table class="w-full mt-5">
             <thead class="w-full bg-gray-300">
                 <tr>
@@ -10,6 +10,8 @@
                     <th class="text-start">Section</th>
                     <th class="text-start"> Remarks</th>
                     <th class="text-start">Date-Created</th>
+                    <th class="text-start">Charges</th>
+                    <th class="text-start">Bill Statement</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +25,16 @@
                     <td>{{ $acc->section }}</td>
                     <td>{{ $acc->remarks }}</td>
                     <td>{{ $acc->created_at }}</td>
+                    <td>
+                        <a href="/charge/{{ $acc->id }}">
+                            view
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/billing-statement/{{ $acc->id }}">
+                            view
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>

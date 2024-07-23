@@ -24,6 +24,7 @@ Route::get('/charge', [ChargeController::class, 'charge'])->name('charge.index')
 Route::get('/account', [AccountController::class, 'account'])->name('account.index');
 Route::get('/payment', [PaymentController::class, 'payment'])->name('payment.index');
 
-Route::get('/billing-statement/{id}', [AccountController::class, 'billing']);
+Route::get('/charge/{id}', [AccountController::class, 'billing']);
+Route::get('/billing-statement/{id}', [AccountController::class, 'bill']);
 
 // Route::post('/student', [StudentController::class, 'store'])->name('student.store');

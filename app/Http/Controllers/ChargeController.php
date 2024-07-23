@@ -8,37 +8,41 @@ use Illuminate\Http\Request;
 
 class ChargeController extends Controller
 {
-    // public function charge()
-    // {
-    //     $acc = Account::get();
-    //     return view('charge.index', compact('acc'));
-    // }
-
-    public function charge()
-    {
-        $acc = Account::get();
-        return view('billing-statement', compact('acc'));
-    }
-
 
     public function index()
     {
         $char = Charge::orderBy('id');
-        return view('template._charge-list', compact('char'));
+        return view('billing-statement', compact('char'));
     }
+
 
     public function store(Request $request)
     {
-        // dd('gana');
+        // Validate the request data
         $request->validate([
-            'account_id' => 'required',
-            'title' => 'required',
-            'amount' => 'required',
+            'account_id' => 'required|exists:accounts,id',
+            'title' => 'required|string|max:255',
+            'amount' => 'required|numeric|min:0',
         ]);
 
+        // Retrieve the account
+        $account = Account::findOrFail($request->account_id);
 
-        $char = Charge::create($request->all());
+        // Create the charge
+        $charge = new Charge();
+        $charge->account_id = $account->id;
+        $charge->title = $request->title;
+        $charge->amount = $request->amount;
+        $charge->save();
 
-        return view('template._charge-list', compact('char'));
+        return view('/billing-statement', compact('charge'));
+    }
+
+    public function destroy($id)
+    {
+        $charge = Charge::find($id);
+        $charge->delete();
+
+        return view('/account');
     }
 }
