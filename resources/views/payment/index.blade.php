@@ -1,13 +1,11 @@
 @extends('layout.base')
 @section('content')
-    {{-- @include('student.modal.create') --}}
     <div class="fixed inset-0 flex items-center -mt-10 justify-center bg-gray-800 bg-opacity-50 @if ($errors->any()) @else hidden @endif"
         id="trigger">
         <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
             <div class="px-4 py-5 sm:p-6">
-                <h3 class="text-xl font-bold text-gray-900">Create Account</h3>
-                <form hx-post="/api/payment" hx-target="#display-payment" hx-swap="innerHTML" hx-trigger="submit" method="POST"
-                    hx-on::after-request="this.reset()">
+                <h3 class="text-xl font-bold text-gray-900">Payment</h3>
+                <form action="{{ route('stripe') }}" method="POST">
                     @csrf
                     <div class="mt-2">
                         <p class="text-sm text-gray-500">
@@ -18,12 +16,11 @@
                                 @foreach ($acc as $acc)
                                     <option value="{{ $acc->id }}" class="text-black">
                                         Account - {{ $acc->id }} -
-                                        {{ $acc->student->first_name }}{{ $acc->student->last_name }}
+                                        {{ $acc->student->first_name }} {{ $acc->student->last_name }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-
 
                         <div class="mb-2">
                             <label for="date_time">Datetime</label>
@@ -51,8 +48,6 @@
         </div>
     </div>
 
-
-
     <div class="flex justify-between">
         <div class="text-xl font-bold">
             Payment Record
@@ -64,19 +59,11 @@
         </div>
     </div>
 
-    <div id="display-payment" hx-trigger="load" hx-get="/api/payment" hx-swap="innerHTML">
-
-    </div>
+    <div id="display-payment" hx-trigger="load" hx-get="/api/payment" hx-swap="innerHTML"></div>
 
     <script>
         function closeModal() {
             document.getElementById('trigger').classList.add('hidden');
-
-            document.getElementById('firstError').innerHTML = '';
-            document.getElementById('lastError').innerHTML = '';
-            document.getElementById('birthError').innerHTML = '';
-            document.getElementById('addressError').innerHTML = '';
-            document.getElementById('success').innerHTML = '';
         }
     </script>
 @endsection

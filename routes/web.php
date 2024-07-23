@@ -6,6 +6,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentController;
 use App\Models\Student;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StripeController;
+use Stripe\Stripe;
 
 Route::get('/', function () {
     return view('page.index');
@@ -26,5 +28,9 @@ Route::get('/payment', [PaymentController::class, 'payment'])->name('payment.ind
 
 Route::get('/charge/{id}', [AccountController::class, 'billing']);
 Route::get('/billing-statement/{id}', [AccountController::class, 'bill']);
+
+Route::post('/stripe', [StripeController::class, 'stripe'])->name('stripe');
+Route::get('/success', [StripeController::class, 'success'])->name('success');
+Route::get('/cancle', [StripeController::class, 'cancle'])->name('cancle');
 
 // Route::post('/student', [StudentController::class, 'store'])->name('student.store');
